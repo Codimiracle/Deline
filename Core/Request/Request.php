@@ -11,8 +11,4 @@ namespace Core\Request;
 
 class Request
 {
-    public function __construct()
-    {
-
-    }
 }
