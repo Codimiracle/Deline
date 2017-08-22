@@ -1,0 +1,7 @@
+{
+  "name": "User",
+  "version": "0.0.1",
+  "dependencies": {
+    "Database" : "0.0.1"
+  }
+}
