@@ -11,9 +11,9 @@ namespace Modules\Database;
 
 class DatabaseConfig
 {
-    const DATABASE_HOST = "";
-    const DATABASE_PORT = "";
-    const DATABASE_NAME = "";
-    const DATABASE_USERNAME = "";
-    const DATABASE_PASSWORD = "";
+    const DATABASE_HOST = "localhost";
+    const DATABASE_PORT = "3306";
+    const DATABASE_NAME = "deline_app";
+    const DATABASE_USERNAME = "deline_admin";
+    const DATABASE_PASSWORD = "delapw";
 }

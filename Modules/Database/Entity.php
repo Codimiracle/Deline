@@ -8,7 +8,11 @@
 
 namespace Modules\Database;
 
-
+/**
+ * Class Entity
+ *
+ * @package Modules\Database
+ */
 abstract class Entity
 {
     private $data;
