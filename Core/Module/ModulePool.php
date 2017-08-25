@@ -8,7 +8,11 @@
 
 namespace Core\Module;
 
-
+/**
+ * Class ModulePool
+ * save Module autoloader
+ * @package Core\Module
+ */
 class ModulePool
 {
     /**
@@ -16,6 +20,10 @@ class ModulePool
      */
     private $modules;
 
+    /**
+     * ModulePool constructor.
+     *
+     */
     public function __construct()
     {
         $this->modules = array();
