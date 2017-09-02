@@ -81,6 +81,12 @@ class NodePath
     }
 
     /**
+     * @return int
+     */
+    public function getNodeCount() {
+        return count($this->nodes);
+    }
+    /**
      * get node path string.
      * @return string
      */
