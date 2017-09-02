@@ -8,48 +8,36 @@
 
 namespace Core;
 
-
-use Core\Module\Binder;
-use Core\Module\ModulePool;
-use Core\Route\Router;
+use Core\Services\ModuleInvokerService;
+use Core\Services\Service;
 
 class Kernel
 {
-    /**
-     * @var ModulePool
-     */
-    private static $pool = null;
+    const SERVICE_MODULE_INVOKER = "service_module_invoker";
 
     /**
-     * @var Router
+     * @var array
      */
-    private static $router = null;
+    private $services = array();
 
     public function __construct()
     {
-        if (is_null(self::$pool)) {
-            self::$pool = new ModulePool() ;
-        }
-
-        if (is_null(self::$router)) {
-            self::$router = new Router();
-        }
+        $this->putService(self::SERVICE_MODULE_INVOKER, new ModuleInvokerService());
+    }
+    /**
+     * @param string $name
+     * @param Service $service
+     */
+    private function putService($name, $service) {
+        $this->services[$name] = $service;
     }
 
     /**
-     * @return ModulePool
+     * @param string $service_name
+     * @return Service
      */
-    public function getPool()
-    {
-        return self::$pool;
-    }
-
-    /**
-     * @return Router
-     */
-    public function getRouter()
-    {
-        return self::$router;
+    public function getService($service_name) {
+        return $this->services[$service_name];
     }
 
 }
