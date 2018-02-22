@@ -1,30 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-2-3
- * Time: 下午3:00
- */
+namespace Deline\Component;
 
-namespace CAstore\Component;
+use Deline\Controller\ControllerFactory;
+use Deline\Model\DAO\DataAccessObjectFactory;
+use Deline\Service\ServiceFactory;
+use Deline\View\RendererFactory;
 
-
-use CAstore\Action\ActionFactory;
-use CAstore\Operation\OperationFactory;
-use CAstore\DAO\DataAccessObjectFactory;
-
-class ComponentCenter
+interface ComponentCenter extends ControllerFactory, DataAccessObjectFactory, ServiceFactory, RendererFactory
 {
-    public static function getDataAccessObject($context, $name)
-    {
-        return DataAccessObjectFactory::getDataAccessObject($context, $name);
-    }
-    public static function getAction($context, $name)
-    {
-        return ActionFactory::getAction($context, $name);
-    }
-    public static function getOperation($context, $name)
-    {
-        return OperationFactory::getOperation($context, $name);
-    }
+
+    public function setContainer($container);
+
+    public function getContainer();
 }

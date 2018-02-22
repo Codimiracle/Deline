@@ -1,14 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * Component: codimiracle
- * Date: 18-1-17
- * Time: 下午3:41
- */
-namespace CAstore\Component;
+namespace Deline\Component;
 
 class NodePath
 {
+
     private $nodePath;
 
     private $nodes;
@@ -20,12 +15,13 @@ class NodePath
             $this->nodePath = $node_path;
             $this->nodes = explode("/", substr($node_path, 1));
         } else {
-            throw new NodePathFormatException("the '".$node_path."' is not a standard node path.");
+            throw new NodePathFormatException("the '" . $node_path . "' is not a standard node path.");
         }
     }
 
     /**
      * get representation of the node path via String.
+     *
      * @return string
      */
     public function __toString()
@@ -33,20 +29,22 @@ class NodePath
         if (count($this->nodes) == 0) {
             return "/";
         }
-        return "/".implode("/", $this->nodes);
+        return "/" . implode("/", $this->nodes);
     }
 
     /**
      * 获取第一个节点名称
+     *
      * @return string
      */
-    public function getMainNodeName() {
+    public function getMainNodeName()
+    {
         return $this->nodes[0];
     }
 
-    public function getSubnodePath($index = 1) {
-        $nodes = array_slice($this->nodes,$index);
-        return new NodePath("/".implode("/",$nodes));
+    public function getSubnodePath($index = 1)
+    {
+        $nodes = array_slice($this->nodes, $index);
+        return new NodePath("/" . implode("/", $nodes));
     }
-
 }

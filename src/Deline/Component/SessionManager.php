@@ -5,19 +5,18 @@
  * Date: 18-1-17
  * Time: 下午3:57
  */
-namespace CAstore\Component;
-
-use CAstore\DAO\RoleInfoDAO;
-use CAstore\DAO\UserInfo;
-use CAstore\DAO\UserInfoDAO;
+namespace Deline\Component;
 
 class SessionManager
 {
+
     const ANONYMOUS_ROLE_ID = 1;
+
     const SESSION_LOGGED_USER = "logged_user";
 
     /** @var  UserInfoDAO */
     private $userInfoDAO;
+
     /** @var  RoleInfoDAO */
     private $roleInfoDAO;
 
@@ -29,6 +28,7 @@ class SessionManager
     }
 
     /**
+     *
      * @return RoleInfoDAO
      */
     public function getRoleInfoDAO()
@@ -37,6 +37,7 @@ class SessionManager
     }
 
     /**
+     *
      * @param RoleInfoDAO $role_info_dAO
      */
     public function setRoleInfoDAO($role_info_dAO)
@@ -44,28 +45,35 @@ class SessionManager
         $this->roleInfoDAO = $role_info_dAO;
     }
 
-
     /**
+     *
      * @param UserInfoDAO $user_info_dao
      */
-    public function setUserInfoDAO($user_info_dao) {
+    public function setUserInfoDAO($user_info_dao)
+    {
         $this->userInfoDAO = $user_info_dao;
     }
+
     /**
+     *
      * @param UserInfo $user_info
      */
-    public function setUserInfo($user_info) {
+    public function setUserInfo($user_info)
+    {
         $_SESSION[self::SESSION_LOGGED_USER] = $user_info;
     }
 
     /**
+     *
      * @return UserInfo
      */
-    public function getUserInfo() {
+    public function getUserInfo()
+    {
         return $_SESSION[self::SESSION_LOGGED_USER];
     }
 
-    public function getRoleInfo() {
+    public function getRoleInfo()
+    {
         $roleId = null;
         if ($this->isLogged()) {
             $roleId = $this->getUserInfo()->getRoleId();
@@ -78,6 +86,7 @@ class SessionManager
 
     /**
      * 设置会话参数
+     * 
      * @param string $key
      * @param mixed $value
      */
@@ -88,7 +97,9 @@ class SessionManager
 
     /**
      * 获取会话参数
-     * @param $key
+     * 
+     * @param
+     *            $key
      * @return mixed|null
      */
     public function getParameter($key)
@@ -102,6 +113,7 @@ class SessionManager
 
     /**
      * 登录会话
+     * 
      * @param string $username
      * @param string $password
      */
@@ -119,10 +131,12 @@ class SessionManager
 
     /**
      * 会话已登录
+     * 
      * @return bool
      */
-    public function isLogged() {
-        return isset($_SESSION[self::SESSION_LOGGED_USER]) && !is_null($_SESSION[self::SESSION_LOGGED_USER]);
+    public function isLogged()
+    {
+        return isset($_SESSION[self::SESSION_LOGGED_USER]) && ! is_null($_SESSION[self::SESSION_LOGGED_USER]);
     }
 
     /**

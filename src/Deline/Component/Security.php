@@ -5,7 +5,7 @@
  * Date: 18-1-17
  * Time: 下午3:42
  */
-namespace CAstore\Component;
+namespace Deline\Component;
 
 class Security
 {
