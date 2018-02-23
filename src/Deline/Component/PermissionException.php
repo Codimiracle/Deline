@@ -7,6 +7,6 @@
  */
 namespace Deline\Component;
 
-class PermissionDeniedException extends \Exception
+class PermissionException extends \Exception
 {
 }

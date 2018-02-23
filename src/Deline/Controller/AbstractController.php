@@ -2,16 +2,15 @@
 namespace Deline\Controller;
 
 use Deline\Component\Container;
-use Deline\Component\Context;
 use Deline\Component\Mapper;
-use Deline\View\RendererSetter;
+use Deline\View\RendererBuilder;
 
 /**
  * Class AbstractController
  * 代表一个 抽象动作 。
  * 具体请点击<a href="docs\Structure.md">这里</a>
  *
- * @package Deline\AbstractController
+ * @package Deline\Component\AbstractController
  */
 abstract class AbstractController implements Controller
 {
@@ -26,7 +25,7 @@ abstract class AbstractController implements Controller
 
     /**
      *
-     * @var RendererSetter
+     * @var RendererBuilder
      */
     protected $view;
 
@@ -40,7 +39,7 @@ abstract class AbstractController implements Controller
 
     /**
      *
-     * @return Context
+     * @return Container
      */
     public function getContainer()
     {
@@ -49,12 +48,12 @@ abstract class AbstractController implements Controller
 
     /**
      *
-     * @param Context $container
+     * @param Container $container
      */
     public function setContainer($container)
     {
         $this->container = $container;
-        $this->view = new RendererSetter($container->getRenderer());
+        $this->view = new RendererBuilder($container->getRenderer());
     }
 
     public function attachAction($pattern, $method)
@@ -85,7 +84,7 @@ abstract class AbstractController implements Controller
     {
         global $logger;
         $pathname = strval($this->getNodePath());
-        $logger->addDebug("Action Pathname matching: " . $pathname);
+        $logger->addDebug("Controller", array("matched" => $pathname, "class" => get_class($this)));
         return $pathname;
     }
 
@@ -93,7 +92,7 @@ abstract class AbstractController implements Controller
     {
         global $logger;
         $method_name = $this->mapper->match($this->getCurrentNodePathname());
-        $logger->addDebug("Action Method invoking: " . $method_name);
+        $logger->addDebug("Controller", array("method" => $method_name));
         if ($method_name) {
             $this->$method_name();
         } else {

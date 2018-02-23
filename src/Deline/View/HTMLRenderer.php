@@ -1,6 +1,8 @@
 <?php
 namespace Deline\View;
 
+use Deline\Component\Container;
+
 class HTMLRenderer implements Renderer
 {
 
@@ -11,11 +13,29 @@ class HTMLRenderer implements Renderer
     private $parameters = array();
 
     private $attributes = null;
+    
+    private $container;
 
     public function __construct()
     {
         global $website;
         $this->attributes = $website;
+    }
+    
+    /**
+     * @return Container
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    /**
+     * @param Container $container
+     */
+    public function setContainer($container)
+    {
+        $this->container = $container;
     }
 
     // 设置 Renderer Variable.
@@ -41,6 +61,7 @@ class HTMLRenderer implements Renderer
         if (file_exists($template_file)) {
             $attributes = $this->attributes;
             $parameters = $this->parameters;
+            $session = $this->container->getSession()->getSessionData();
             require $template_file;
         }
     }

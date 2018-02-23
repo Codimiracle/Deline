@@ -1,8 +1,8 @@
 <?php
 namespace Deline\Component;
 
-use Deline\Model\Database\DataSource;
 use Deline\View\Renderer;
+use Deline\Model\Database\DataSource;
 
 interface Context
 {
@@ -21,7 +21,7 @@ interface Context
 
     /**
      *
-     * @return SessionManager
+     * @return Session
      */
     public function getSession();
 
@@ -30,4 +30,13 @@ interface Context
      * @return NodePath
      */
     public function getNodePath();
+    
+    /**
+     * @return Permission
+     */
+    public function getPermission();
+    /**
+     * @return ComponentCenter
+     */
+    public function getComponentCenter();
 }

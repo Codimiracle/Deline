@@ -4,7 +4,7 @@ namespace Deline\Component;
 use Deline\Model\Database\DataSource;
 use Deline\Model\Database\MySQLDataSource;
 use Deline\View\Renderer;
-use Deline\View\RendererSetter;
+use Deline\View\RendererBuilder;
 
 class DelineContainer implements Container
 {
@@ -15,7 +15,10 @@ class DelineContainer implements Container
     /** @var  NodePath */
     private $nodePath = null;
 
-    /** @var  SessionManager */
+    /** @var Permission */
+    private $permission;
+    
+    /** @var  Session */
     private $session = null;
 
     /** @var  Renderer */
@@ -43,8 +46,17 @@ class DelineContainer implements Container
     public function setComponentCenter($componentCenter)
     {
         $this->componentCenter = $componentCenter;
+        $this->componentCenter->setContainer($this);
     }
 
+    public function getPermission()
+    {
+        if (is_null($this->permission)) {
+            $this->permission = new DelinePermission();
+            $this->permission->setContainer($this);
+        }
+        return $this->permission;
+    }
     /**
      * 重定向
      *
@@ -83,25 +95,25 @@ class DelineContainer implements Container
             "procedure" => "handle",
             "node_pathname" => $this->getNodePathname()
         ));
-        $action_name = $node_path->getMainNodeName();
+        $controller_name = $node_path->getMainNodeName();
         $logger->addDebug("DelineContainer", array(
             "procedure" => "handle",
-            "action_name" => $action_name
+            "controller name" => $controller_name
         ));
-        if (! $action_name) {
+        if (!$controller_name) {
             return;
         }
-        /** @var AbstractAction $action */
-        $controller = ComponentCenter::getAction($this, $action_name);
+        /** @var Action $action */
+        $controller = $this->getComponentCenter()->getController($controller_name);
         $logger->addDebug("DelineContainer", array(
             "procedure" => "handle",
-            "action_availiable" => boolval($controller)
+            "controller availiable" => boolval($controller)
         ));
         if ($controller) {
             try {
                 $logger->addInfo("DelineContainer", array(
-                    "procedure" => "action",
-                    "name" => $action_name,
+                    "procedure" => "Controller",
+                    "name" => $controller_name,
                     "class" => get_class($controller),
                     "status" => "start"
                 ));
@@ -110,24 +122,24 @@ class DelineContainer implements Container
                 $controller->onControllerEnd();
                 $logger->addInfo("DelineContainer", array(
                     "procedure" => "action",
-                    "name" => $action_name,
+                    "name" => $controller_name,
                     "class" => get_class($controller),
                     "status" => "end"
                 ));
                 return;
-            } catch (PermissionDeniedException $exception) {
-                $logger->addWarning("Action invoking failed!", array(
-                    "error-src" => $exception->getFile()
+            } catch (PermissionException $exception) {
+                $logger->addWarning("Controller", array("message" => $exception->getMessage(),
+                    "trace" => $exception->getTrace()
                 ));
                 $this->dispatchPermissionDenied($exception->getMessage());
             } catch (\Exception $exception) {
-                $logger->addWarning("Action invoking failed!", array(
-                    "error-src" => $exception->getFile()
+                $logger->addWarning("Controller", array("message"=>$exception->getMessage(),
+                    "trace" => $exception->getTrace()
                 ));
                 $this->dispatchPageError($exception->getMessage());
             }
         } else {
-            $logger->addWarning("Action invoking failed!", array(
+            $logger->addWarning("Controller", array(
                 "message" => "Page Not Found"
             ));
             $this->dispatchPageNotFound();
@@ -153,19 +165,19 @@ class DelineContainer implements Container
     public function getRenderer()
     {
         if (is_null($this->renderer)) {
-            $this->renderer = $componentCenter->getRenderer($this->getRendererType());
+            $this->renderer = $this->getComponentCenter()->getRenderer($this->getRendererType());
         }
         return $this->renderer;
     }
 
     /**
      *
-     * @return SessionManager
+     * @return Session
      */
     public function getSession()
     {
         if (is_null($this->session)) {
-            $this->session = new SessionManager();
+            $this->session = new DelineSession();
         }
         return $this->session;
     }
@@ -205,8 +217,6 @@ class DelineContainer implements Container
     public function init()
     {
         global $logger;
-        $this->getSession()->setUserInfoDAO(ComponentCenter::getDataAccessObject($this, "UserInfoDAO"));
-        $this->getSession()->setRoleInfoDAO(ComponentCenter::getDataAccessObject($this, "RoleInfoDAO"));
         $logger->addDebug("DelineContainer", array(
             "node" => $this->getNodePathname()
         ));
@@ -219,7 +229,7 @@ class DelineContainer implements Container
     public function dispatchPageError($message)
     {
         $this->dispatch("/System/PageError");
-        $view = new RendererSetter($this->getRenderer());
+        $view = new RendererBuilder($this->getRenderer());
         $view->setMessage("error", $message);
     }
 
@@ -231,7 +241,7 @@ class DelineContainer implements Container
     public function dispatchPermissionDenied($message)
     {
         $this->dispatch("/System/PermissionDenied");
-        $view = new RendererSetter($this->getRenderer());
+        $view = new RendererBuilder($this->getRenderer());
         $view->setMessage("error", $message);
     }
 
@@ -272,4 +282,5 @@ class DelineContainer implements Container
             $this->getRenderer()->render();
         }
     }
+
 }

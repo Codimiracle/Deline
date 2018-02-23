@@ -1,20 +1,20 @@
 <?php
 namespace Deline\Service;
 
-use Deline\Component\Context;
+use Deline\Component\Container;
 
 interface Service
 {
 
     /**
      *
-     * @param Context $context
+     * @param Container $container
      */
-    public function setContext($context);
+    public function setContainer($container);
 
     /**
      *
-     * @return Context
+     * @return Container
      */
-    public function getContext();
+    public function getContainer();
 }

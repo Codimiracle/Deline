@@ -5,6 +5,8 @@ namespace Deline\View;
 interface Renderer
 {
 
+    public function setContainer($container);
+    public function getContainer();
     /**
      * 设置 Renderer 的属性
      * 

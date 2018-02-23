@@ -1,19 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-2-5
- * Time: 下午9:33
- */
+namespace Deline\View;
 
-namespace CAstore\Template;
-
-
-class RendererSetter
+class RendererBuilder
 {
+
     const MESSAGE_ICON_INFO = "info";
+
     const MESSAGE_ICON_DANGER = "danger";
+
     /**
+     *
      * @var Renderer
      */
     private $renderer;
@@ -28,6 +24,7 @@ class RendererSetter
         $this->renderer->setAttribute("title", $title);
         return $this;
     }
+
     public function setPageName($name)
     {
         $this->renderer->setAttribute("page-name", $name);
