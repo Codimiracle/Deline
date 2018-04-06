@@ -1,0 +1,16 @@
+{
+    "name": "codimiracle/deline",
+    "description": "this is a lightweight php framework.",
+    "type": "library",
+    "require": {
+        "monolog/monolog": "^1.23"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Codimiracle",
+            "email": "Codimiracle@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
