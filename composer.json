@@ -3,7 +3,7 @@
 	"description" : "this is a lightweight php framework.",
 	"type" : "library",
 	"require" : {
-		"php" : ">5.4"
+		"php" : ">5.4",
 		"monolog/monolog" : "^1.23"
 	},
 	"license" : "MIT",
