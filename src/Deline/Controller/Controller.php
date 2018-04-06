@@ -5,7 +5,9 @@ use Exception;
 
 interface Controller
 {
+
     /**
+     *
      * @throws Exception
      */
     public function onControllerHandle();

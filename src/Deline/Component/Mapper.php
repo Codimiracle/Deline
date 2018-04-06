@@ -14,7 +14,7 @@ class Mapper
 
     /**
      * 获取第一个匹配 $actual 的 value.
-     * 
+     *
      * @param string $actual
      * @return mixed|null
      */
@@ -31,7 +31,7 @@ class Mapper
 
     /**
      * 映射
-     * 
+     *
      * @param
      *            $pattern
      * @param

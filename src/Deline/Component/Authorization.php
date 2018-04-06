@@ -1,19 +1,26 @@
 <?php
 namespace Deline\Component;
 
-interface Permission
+interface Authorization
 {
-    
+
     /**
-     * 
+     *
      * @param Container $container
      */
     public function setContainer($container);
+
     public function getContainer();
 
     /**
      *
-     * @return array
+     * @param multitype:string $permissions
+     */
+    public function setPermissions($permissions);
+
+    /**
+     *
+     * @return multitype:string
      */
     public function getPermissions();
 
@@ -30,7 +37,7 @@ interface Permission
     public function revoke($premission);
 
     /**
-     * 
+     *
      * @param string $permission
      * @throws PermissionException
      */

@@ -1,7 +1,7 @@
 <?php
-namespace Deline\Verifier;
+namespace Deline\Validator;
 
-abstract class AbstractVerifier implements Verifier
+abstract class AbstractValidator implements Validator
 {
 
     private $hit = - 1;
@@ -14,12 +14,12 @@ abstract class AbstractVerifier implements Verifier
     {
         if (isset($_POST[$field]) && ($value = $_POST[$field]) != "") {
             if (preg_match($this->getPattern($field), $value)) {
-                return Verifier::RESULT_OK;
+                return Validator::RESULT_OK;
             } else {
-                return Verifier::RESULT_UNRECOGNIZED;
+                return Validator::RESULT_UNRECOGNIZED;
             }
         } else {
-            return Verifier::RESULT_EMPTY;
+            return Validator::RESULT_EMPTY;
         }
     }
 
@@ -57,7 +57,7 @@ abstract class AbstractVerifier implements Verifier
     {
         $code = $this->check($field);
         $this->codes[$field] = $code;
-        if ($code != Verifier::RESULT_OK && $this->hit != 1) {
+        if ($code != Validator::RESULT_OK && $this->hit != 1) {
             $this->hit = 1;
             $this->hittedField = $field;
             return false;
@@ -74,11 +74,11 @@ abstract class AbstractVerifier implements Verifier
     {
         $code = $this->codes[$field];
         switch ($code) {
-            case Verifier::RESULT_OK:
+            case Validator::RESULT_OK:
                 return $this->getPassedMessage($field);
-            case Verifier::RESULT_EMPTY:
+            case Validator::RESULT_EMPTY:
                 return $this->getEmptyMessage($field);
-            case Verifier::RESULT_UNRECOGNIZED:
+            case Validator::RESULT_UNRECOGNIZED:
                 return $this->getUnrecognizedMessage($field);
             default:
                 return "Unkown verified code.";

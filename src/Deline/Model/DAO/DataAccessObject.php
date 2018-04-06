@@ -1,11 +1,10 @@
 <?php
-
 namespace Deline\Model\DAO;
 
 /**
  * Interface DataAccessObject
  * Abstract Document Pattern.
- * 
+ *
  * @package Core\Utils
  */
 interface DataAccessObject
@@ -22,6 +21,8 @@ interface DataAccessObject
     public function setPager($pager);
 
     public function getPager();
+    
+    public function getLastInsertedId();
 
     public function insert();
 

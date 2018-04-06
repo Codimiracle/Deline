@@ -15,9 +15,9 @@ class DelineContainer implements Container
     /** @var  NodePath */
     private $nodePath = null;
 
-    /** @var Permission */
-    private $permission;
-    
+    /** @var Authorization */
+    private $authorization;
+
     /** @var  Session */
     private $session = null;
 
@@ -49,14 +49,15 @@ class DelineContainer implements Container
         $this->componentCenter->setContainer($this);
     }
 
-    public function getPermission()
+    public function getAuthorization()
     {
-        if (is_null($this->permission)) {
-            $this->permission = new DelinePermission();
-            $this->permission->setContainer($this);
+        if (is_null($this->authorization)) {
+            $this->authorization = new DelineAuthorization();
+            $this->authorization->setContainer($this);
         }
-        return $this->permission;
+        return $this->authorization;
     }
+
     /**
      * 重定向
      *
@@ -100,7 +101,7 @@ class DelineContainer implements Container
             "procedure" => "handle",
             "controller name" => $controller_name
         ));
-        if (!$controller_name) {
+        if (! $controller_name) {
             return;
         }
         /** @var Action $action */
@@ -128,19 +129,28 @@ class DelineContainer implements Container
                 ));
                 return;
             } catch (PermissionException $exception) {
-                $logger->addWarning("Controller", array("message" => $exception->getMessage(),
+                $logger->addWarning("Controller", array(
+                    "message" => $exception->getMessage(),
                     "trace" => $exception->getTrace()
                 ));
                 $this->dispatchPermissionDenied($exception->getMessage());
+            } catch (PageNotFoundException $exception) {
+                $logger->addWarning("Controller", array(
+                    "message" => $exception->getMessage(),
+                    "trace" => $exception->getTrace()
+                ));
+                $this->dispatchPageNotFound();
             } catch (\Exception $exception) {
-                $logger->addWarning("Controller", array("message"=>$exception->getMessage(),
+                $logger->addWarning("Controller", array(
+                    "message" => $exception->getMessage(),
                     "trace" => $exception->getTrace()
                 ));
                 $this->dispatchPageError($exception->getMessage());
             }
         } else {
             $logger->addWarning("Controller", array(
-                "message" => "Page Not Found"
+                "message" => "Page Not Found",
+                "node" => $this->getNodePathname()
             ));
             $this->dispatchPageNotFound();
         }
@@ -282,5 +292,4 @@ class DelineContainer implements Container
             $this->getRenderer()->render();
         }
     }
-
 }

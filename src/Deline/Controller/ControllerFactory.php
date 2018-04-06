@@ -9,9 +9,11 @@ namespace Deline\Controller;
 
 interface ControllerFactory
 {
+
     /**
      *
-     * @param string $name 动作名称
+     * @param string $name
+     *            动作名称
      * @return Controller
      */
     public function getController($name);

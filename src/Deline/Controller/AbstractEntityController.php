@@ -1,22 +1,21 @@
 <?php
-
 namespace Deline\Controller;
 
 abstract class AbstractEntityController extends AbstractController
 {
 
-    public function onActionStart()
+    public function onControllerStart()
     {
-        $this->attachAction("/^\\/Append$/", "onEntityAppend");
-        $this->attachAction("/^\\/[0-9]+$/", "onEntityDetails");
-        $this->attachAction("/^\\/[0-9]+\\/Edit$/", "onEntityEdit");
-        $this->attachAction("/^\\/[0-9]+\\/Delete/", "onEntityDelete");
-        $this->attachAction("/^\\/[0-9]+\\/Update/", "onEntityUpdate");
+        $this->attachAction("/^\\/Append($|\\/$)/", "onEntityAppend");
+        $this->attachAction("/^\\/[0-9]+($|\\/$)/", "onEntityDetails");
+        $this->attachAction("/^\\/[0-9]+\\/Edit($|\\/$)/", "onEntityEdit");
+        $this->attachAction("/^\\/[0-9]+\\/Delete($|\\/$)/", "onEntityDelete");
+        $this->attachAction("/^\\/[0-9]+\\/Update($|\\/$)/", "onEntityUpdate");
     }
 
     /**
      * 获取实体ID
-     * 
+     *
      * @return int
      */
     public function getEntityId()
@@ -34,8 +33,6 @@ abstract class AbstractEntityController extends AbstractController
     public abstract function onEntityEdit();
 
     public abstract function onEntityDelete();
-
-    public abstract function onEntityUpdate();
 
     public abstract function onEntityDetails();
 }

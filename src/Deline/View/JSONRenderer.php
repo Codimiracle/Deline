@@ -13,7 +13,7 @@ class JSONRenderer implements Renderer
     const RESULT_TYPE_ERROR = "error";
 
     private $container;
-    
+
     private $attributes = array();
 
     private $json = array(
@@ -23,21 +23,23 @@ class JSONRenderer implements Renderer
     );
 
     /**
+     *
      * @return Container
      */
     public function getContainer()
     {
         return $this->container;
     }
-    
+
     /**
+     *
      * @param Container $container
      */
     public function setContainer($container)
     {
         $this->container = $container;
     }
-    
+
     public function setParameter($key, $value)
     {
         $this->json["extra"][$key] = $value;

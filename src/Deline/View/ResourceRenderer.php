@@ -9,23 +9,25 @@ class ResourceRenderer implements Renderer
     private $mapping = array();
 
     private $container;
-    
+
     /**
+     *
      * @return Container
      */
     public function getContainer()
     {
         return $this->container;
     }
-    
+
     /**
+     *
      * @param Container $container
      */
     public function setContainer($container)
     {
         $this->container = $container;
     }
-    
+
     /**
      * 设置 Renderer 的属性
      *

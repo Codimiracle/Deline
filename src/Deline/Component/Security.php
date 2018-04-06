@@ -9,16 +9,16 @@ namespace Deline\Component;
 
 class Security
 {
-    public static function escapeHTML($input) {
+    public static function escapeHTML($input)
+    {
         return htmlspecialchars($input);
     }
 
-    public static function escapeSQL($input) {
+    public static function escapeSQL($input)
+    {}
 
-    }
-
-    public static function password($input) {
+    public static function password($input)
+    {
         return hash("sha256", $input);
     }
-
 }

@@ -1,9 +1,9 @@
 <?php
-
 namespace Deline\Model\DAO;
 
 interface DataAccessObjectFactory
 {
+
     /**
      *
      * @param string $name

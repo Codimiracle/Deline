@@ -4,6 +4,7 @@ namespace Deline\Controller;
 use Deline\Component\Container;
 use Deline\Component\Mapper;
 use Deline\View\RendererBuilder;
+use Deline\Component\PageNotFoundException;
 
 /**
  * Class AbstractController
@@ -82,26 +83,40 @@ abstract class AbstractController implements Controller
      */
     private function getCurrentNodePathname()
     {
-        global $logger;
-        $pathname = strval($this->getNodePath());
-        $logger->addDebug("Controller", array("matched" => $pathname, "class" => get_class($this)));
-        return $pathname;
+        return strval($this->getNodePath());
     }
 
     public function onControllerHandle()
     {
         global $logger;
-        $method_name = $this->mapper->match($this->getCurrentNodePathname());
-        $logger->addDebug("Controller", array("method" => $method_name));
+        $logger->addDebug("Controller", array(
+            "class" => get_class($this)
+        ));
+        $pathname = $this->getCurrentNodePathname();
+        $logger->addInfo("Controller", array(
+            "matching" => $pathname
+        ));
+        $method_name = $this->mapper->match($pathname);
+        $logger->addInfo("Controller", array(
+            "matched" => boolval($method_name)
+        ));
         if ($method_name) {
+            $logger->addInfo("Controller", array(
+                "invoking" => $method_name
+            ));
             $this->$method_name();
         } else {
-            $this->onActionDefaultHandle();
+            $logger->addInfo("Controller", array(
+                "invoking" => "onControllerDefaultHandle"
+            ));
+            $this->onControllerDefaultHandle();
         }
     }
 
     public function onControllerDefaultHandle()
-    {}
+    {
+        throw new PageNotFoundException("Page not found");
+    }
 
     public abstract function onControllerStart();
 

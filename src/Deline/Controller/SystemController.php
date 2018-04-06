@@ -9,6 +9,7 @@ class SystemController extends AbstractController
     public function onControllerStart()
     {
         $this->attachAction("/^\\/$/", "onSystemRoot");
+        $this->attachAction("/^\\/Phpinfo$/", "onPhpInfo");
         $this->attachAction("/^\\/PageNotFound$/", "onPageNotFound");
         $this->attachAction("/^\\/PermissionDenied$/", "onPermissionDenied");
         $this->attachAction("/^\\/PageError$/", "onPageError");
@@ -17,9 +18,16 @@ class SystemController extends AbstractController
 
     public function onSystemRoot()
     {
-        $this->container->getPermission()->check("console");
+        $this->container->getAuthorization()->check("console");
+        $this->view->setPageTitle("Dashboard");
+        $this->view->setPageName("system.dashboard");
+    }
+    
+    public function onPhpInfo()
+    {
+        $this->container->getAuthorization()->check("console");
         $this->view->setPageTitle("phpinfo");
-        $this->view->setPageName("system.main");
+        $this->view->setPageName("system.phpinfo");
     }
 
     public function onNodePathError()
@@ -35,7 +43,7 @@ class SystemController extends AbstractController
         $this->view->setPageName("system.page-not-found");
         $this->view->setMessage("alert", "Page Not Found");
     }
-    
+
     public function onPermissionDenied()
     {
         $this->view->setPageTitle("Permission Denied");

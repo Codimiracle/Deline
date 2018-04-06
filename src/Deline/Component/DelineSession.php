@@ -20,7 +20,7 @@ class DelineSession implements Session
     {
         return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
     }
-    
+
     public function getSessionData()
     {
         return $_SESSION;
@@ -28,13 +28,13 @@ class DelineSession implements Session
 
     public function destroy()
     {
-        session_destroy();
+        session_unset();
     }
 
     public function restart()
     {
         if (session_id() != "") {
-            session_destroy();
+            session_unset();
             session_start();
         }
     }

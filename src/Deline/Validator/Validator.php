@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: codimiracle
- * Date: 18-2-2
- * Time: 下午3:55
- */
-namespace Deline\Verifier;
+namespace Deline\Validator;
 
-interface Verifier
+interface Validator
 {
 
     const RESULT_OK = 0x00;
