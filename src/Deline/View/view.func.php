@@ -27,7 +27,7 @@ function deline_show_file($filename) {
     $session    = $GLOBALS["session"];
     require_once $filename;
 }
-function delien_show_template($template_name) {
+function deline_show_template($template_name) {
     deline_show_file(getcwd()."/templates/tpl.".$template_name.".php");
 }
 function deline_show_html_head() {
