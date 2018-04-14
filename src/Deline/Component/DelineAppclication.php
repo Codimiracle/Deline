@@ -2,7 +2,6 @@
 namespace Deline\Component;
 
 use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
 
 class DelineAppclication
 {
