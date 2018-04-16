@@ -32,6 +32,7 @@ function deline_session_get($name) {
     } else {
         return null;
     }
+    return $GLOBALS["parameters"][$name];
 }
 
 function deline_load_stylesheet($filename) {
