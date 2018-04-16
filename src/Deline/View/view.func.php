@@ -10,6 +10,18 @@ $GLOBALS["stylesheets"] = array();
 $GLOBALS["scripts"] = array();
 $GLOBALS["scripts_sync"] = array();
 
+function deline_parameter_get($name) {
+    return $GLOBALS["parameters"][$name];
+}
+
+function deline_attribute_get($name) {
+    return $GLOBALS["attributes"][$name];
+}
+
+function deline_session_get($name) {
+    return $GLOBALS["session"][$name];
+}
+
 function deline_load_stylesheet($filename) {
     array_push($GLOBALS["stylesheets"], $filename);
 }
@@ -47,3 +59,8 @@ function deline_show_footer() {
 function deline_show_text($text) {
     echo Security::escapeHTML($text);
 }
+
+function deline_show_html($html) {
+    echo $html;
+}
+
