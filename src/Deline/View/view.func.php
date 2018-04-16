@@ -11,10 +11,6 @@ $GLOBALS["scripts"] = array();
 $GLOBALS["scripts_sync"] = array();
 
 function deline_parameter_get($name) {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 8a322d5b76768c7e448e349c9e42b187c271c0a9
     if (isset($GLOBALS["parameters"][$name])) {
         return $GLOBALS["parameters"][$name];
     } else {
@@ -36,21 +32,6 @@ function deline_session_get($name) {
     } else {
         return null;
     }
-<<<<<<< HEAD
-    return $GLOBALS["parameters"][$name];
-=======
-=======
-    return $GLOBALS["parameters"][$name];
-}
-
-function deline_attribute_get($name) {
-    return $GLOBALS["attributes"][$name];
-}
-
-function deline_session_get($name) {
-    return $GLOBALS["session"][$name];
->>>>>>> 3d45d1c7ec39f938799225abe3650c9631a0fc77
->>>>>>> 8a322d5b76768c7e448e349c9e42b187c271c0a9
 }
 
 function deline_load_stylesheet($filename) {
