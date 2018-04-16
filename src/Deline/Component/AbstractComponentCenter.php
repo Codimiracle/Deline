@@ -9,6 +9,7 @@ use Deline\Service\Service;
 use Deline\Model\DAO\DataAccessObject;
 use Deline\View\Renderer;
 use Deline\Service\DelineUploadService;
+use Deline\Service\DelineCommonUploadService;
 
 abstract class AbstractComponentCenter implements ComponentCenter
 {
@@ -20,7 +21,8 @@ abstract class AbstractComponentCenter implements ComponentCenter
     );
 
     private $services = array(
-        "UploadService" => DelineUploadService::class
+        "UploadService" => DelineUploadService::class,
+        "CommonUploadService" => DelineCommonUploadService::class
     );
 
     private $controllers = array(
