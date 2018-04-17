@@ -9,6 +9,8 @@ class DelineCommonUploadService implements CommonUploadService
 
     /** @var DelineUploadHandler $uploader */
     private $uploader;
+    
+    private $container;
 
     public function doUpload($dirname = null)
     {
@@ -22,5 +24,15 @@ class DelineCommonUploadService implements CommonUploadService
             "upload_dir" => $path
         ));
     }
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    public function setContainer($container)
+    {
+        $this->container = $container;
+    }
+
 }
 

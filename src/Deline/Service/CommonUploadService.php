@@ -1,4 +1,6 @@
 <?php
-interface CommonUploadService {
+use Deline\Service\Service;
+
+interface CommonUploadService extends Service{
     public function doUpload();
 }
