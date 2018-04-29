@@ -50,23 +50,27 @@ class HTMLRenderer implements Renderer
             return null;
         }
     }
-
-    // 加载 HTML 模板
-    private function load($page_name)
-    {
+    private function load($page_name) {
         $template_file = getcwd() . "/templates/tpl." . $page_name . ".php";
         if (file_exists($template_file)) {
             $attributes = $this->attributes;
             $parameters = $this->parameters;
             $session = $this->container->getSession()->getSessionData();
-            require __DIR__.'/view.func.php';
             require $template_file;
         }
+    }
+    // 加载 HTML 模板带操作函数
+    private function loadPage($page_name)
+    {
+        require __DIR__.'/view.func.php';
+        $this->load($page_name);
     }
 
     public function render()
     {
-        $this->load($this->getAttribute("page-name"));
+        $this->load($this->getAttribute("page-name").".head");
+        $this->loadPage($this->getAttribute("page-name"));
+        $this->load($this->getAttribute("page-name").".foot");
     }
 
     public function setAttribute($attribute_name, $attribute_value)
