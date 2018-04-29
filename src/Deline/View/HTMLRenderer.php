@@ -5,6 +5,7 @@ use Deline\Component\Container;
 
 class HTMLRenderer implements Renderer
 {
+
     private $parameters = array();
 
     private $attributes = null;
@@ -50,14 +51,19 @@ class HTMLRenderer implements Renderer
             return null;
         }
     }
-    private function load($template_name) {
-        $template_file = "templates/tpl.".$template_name.".php";
-        $attributes = $this->attributes;
-        $parameters = $this->parameters;
-        $session = $this->container->getSession()->getSessionData();
-        require __DIR__.'/view.func.php';
-        require $template_file;
+
+    private function load($template_name)
+    {
+        $template_file = "templates/tpl." . $template_name . ".php";
+        if (file_exists($template_file)) {
+            $attributes = $this->attributes;
+            $parameters = $this->parameters;
+            $session = $this->container->getSession()->getSessionData();
+            require __DIR__ . '/view.func.php';
+            require $template_file;
+        }
     }
+
     public function render()
     {
         $page_tpl_name = $this->getAttribute("page-name");
