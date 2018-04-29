@@ -50,21 +50,17 @@ class HTMLRenderer implements Renderer
             return null;
         }
     }
-    private function load($page_name) {
-        $template_file = getcwd() . "/templates/tpl." . $page_name . ".php";
-        if (file_exists($template_file)) {
-            $attributes = $this->attributes;
-            $parameters = $this->parameters;
-            $session = $this->container->getSession()->getSessionData();
-            require __DIR__.'/view.func.php';
-            require $template_file;
-        }
+    private function load($template_file) {
+        $attributes = $this->attributes;
+        $parameters = $this->parameters;
+        $session = $this->container->getSession()->getSessionData();
+        require __DIR__.'/view.func.php';
+        require $template_file;
     }
     public function render()
     {
-        $this->load($this->getAttribute("page-name").".head");
-        $this->load($this->getAttribute("page-name"));
-        $this->load($this->getAttribute("page-name").".foot");
+        $page_tpl_name = $this->getAttribute("page-name");
+        $this->load($page_tpl_name);
     }
 
     public function setAttribute($attribute_name, $attribute_value)

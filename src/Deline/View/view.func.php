@@ -9,6 +9,8 @@ $GLOBALS["session"] = $session;
 $GLOBALS["stylesheets"] = array();
 $GLOBALS["scripts"] = array();
 $GLOBALS["scripts_sync"] = array();
+$GLOBALS["head_additional"] = null;
+$GLOBALS["foot_additional"] = null;
 
 function deline_parameter_get($name) {
     if (isset($GLOBALS["parameters"][$name])) {
@@ -51,10 +53,12 @@ function deline_show_file($filename) {
 function deline_show_template($template_name) {
     deline_show_file(getcwd()."/templates/tpl.".$template_name.".php");
 }
-function deline_show_html_head() {
+function deline_show_html_head($additional = null) {
+    $GLOBALS["head_additional"] = $additional;
     deline_show_template("html.head");
 }
-function deline_show_html_foot() {
+function deline_show_html_foot($additional = null) {
+    $GLOBALS["foot_additional"] = $additional;
     deline_show_template("html.foot");
 }
 function deline_show_header() {
