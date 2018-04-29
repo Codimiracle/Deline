@@ -51,7 +51,7 @@ class HTMLRenderer implements Renderer
         }
     }
     private function load($template_name) {
-        $template_file = "template/tpl.".$template_name.".php";
+        $template_file = "templates/tpl.".$template_name.".php";
         $attributes = $this->attributes;
         $parameters = $this->parameters;
         $session = $this->container->getSession()->getSessionData();
