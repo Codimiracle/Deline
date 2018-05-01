@@ -18,7 +18,7 @@ class DelineCommonUploadService implements CommonUploadService
         if ($dirname) {
             $path .= $dirname;
         } else {
-            $path .= "files";
+            $path .= "uploads";
         }
         $uploader = new DelineUploadHandler(array(
             "upload_dir" => $path
