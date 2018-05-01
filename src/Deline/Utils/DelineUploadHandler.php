@@ -4,9 +4,19 @@ namespace Deline\Utils;
 class DelineUploadHandler extends UploadHandler
 {
 
-    public function __construct($options = null, $initialize = true, $error_messages = null)
+    public function __construct($dirname)
     {
-        parent::__construct($options, $initialize, $error_messages);
+        $path = getcwd() . "/static/";
+        if ($dirname) {
+            $path .= $dirname."/";
+        } else {
+            $path .= "uploads/";
+        }
+        parent::__construct(array(
+            "delete_type" => 'POST',
+            "upload_dir" => $path,
+            "upload_url" => $this->get_full_url()."/download?file="
+        ));
     }
 }
 

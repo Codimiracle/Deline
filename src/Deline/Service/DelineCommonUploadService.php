@@ -14,17 +14,7 @@ class DelineCommonUploadService implements CommonUploadService
 
     public function doUpload($dirname = null)
     {
-        $path = getcwd() . "/static/";
-        if ($dirname) {
-            $path .= $dirname."/";
-        } else {
-            $path .= "uploads/";
-        }
-        $uploader = new DelineUploadHandler(array(
-            "delete_type" => 'POST',
-            "upload_dir" => $path,
-            "upload_url" => "/download"
-        ));
+        $uploader = new DelineUploadHandler($dirname);
     }
     public function getContainer()
     {
