@@ -15,7 +15,7 @@ class DelineUploadHandler extends UploadHandler
         parent::__construct(array(
             "delete_type" => 'POST',
             "upload_dir" => $path,
-            "upload_url" => $this->get_full_url()."/download?file="
+            "upload_url" => $this->get_full_url()."/index.php?node=download&file="
         ));
     }
 }
