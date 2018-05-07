@@ -181,7 +181,6 @@ class DelineContainer implements Container
             } else {
                 $this->renderer = $this->getComponentCenter()->getRenderer("Browser");
             }
-            
         }
         return $this->renderer;
     }
