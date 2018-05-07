@@ -45,6 +45,7 @@ class JSONRenderer implements Renderer
 
     public function render()
     {
+        ob_clean();
         header("Content-Type: text/json");
         echo json_encode($this->json);
     }
