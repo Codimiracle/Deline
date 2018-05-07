@@ -5,9 +5,6 @@ use Deline\Component\Container;
 
 class JSONRenderer implements Renderer
 {
-
-    const RENDERER_VERSION = 0;
-
     const RESULT_TYPE_DATA = "data";
 
     const RESULT_TYPE_ERROR = "error";
@@ -16,11 +13,7 @@ class JSONRenderer implements Renderer
 
     private $attributes = array();
 
-    private $json = array(
-        "code" => "deline-core-dev",
-        "version" => self::RENDERER_VERSION,
-        "extra" => array()
-    );
+    private $json = array();
 
     /**
      *
@@ -42,12 +35,12 @@ class JSONRenderer implements Renderer
 
     public function setParameter($key, $value)
     {
-        $this->json["extra"][$key] = $value;
+        $this->json[$key] = $value;
     }
 
     public function getParameter($key)
     {
-        return $this->json["extra"][$key];
+        return $this->json[$key];
     }
 
     public function render()

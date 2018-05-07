@@ -9,6 +9,7 @@ class SystemController extends AbstractController
     public function onControllerStart()
     {
         $this->attachAction("/^\\/$/", "onSystemRoot");
+        $this->attachAction("/^\\/Info$/", "onSystemInfo");
         $this->attachAction("/^\\/Phpinfo$/", "onPhpInfo");
         $this->attachAction("/^\\/PageNotFound$/", "onPageNotFound");
         $this->attachAction("/^\\/PermissionDenied$/", "onPermissionDenied");
@@ -22,7 +23,12 @@ class SystemController extends AbstractController
         $this->view->setPageTitle("Dashboard");
         $this->view->setPageName("system.dashboard");
     }
-    
+    public function onSystemInfo() {
+        $this->view->setPageTitle("System Info");
+        $this->view->setPageName("system.info");
+        $this->view->setData("code", "deline-core-dev");
+        $this->view->setData("version", 0);
+    }
     public function onPhpInfo()
     {
         $this->container->getAuthorization()->check("console");
