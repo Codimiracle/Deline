@@ -199,7 +199,7 @@ class DelineContainer implements Container
 
     private function getNodePathname()
     {
-        return isset($_SERVER["PATH_INFO"]) ? $_SERVER["PATH_INFO"] : $_SERVER["PATH"];
+        return isset($_GET["q"]) ? $_GET["q"] : "/";
     }
 
     /**
