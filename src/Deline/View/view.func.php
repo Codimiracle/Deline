@@ -11,7 +11,9 @@ $GLOBALS["scripts"] = array();
 $GLOBALS["scripts_sync"] = array();
 $GLOBALS["head_additional"] = null;
 $GLOBALS["foot_additional"] = null;
-
+function deline_link($path) {
+    return "?q=".$path;
+}
 function deline_parameter_get($name) {
     if (isset($GLOBALS["parameters"][$name])) {
         return $GLOBALS["parameters"][$name];

@@ -66,7 +66,7 @@ class DelineContainer implements Container
     public function redirect($node_pathname)
     {
         $this->redirecting = true;
-        header("Location: index.php" . $node_pathname);
+        header("Location: index.php?q=" . $node_pathname);
     }
 
     /**
