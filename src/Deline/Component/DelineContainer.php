@@ -66,7 +66,7 @@ class DelineContainer implements Container
     public function redirect($node_pathname)
     {
         $this->redirecting = true;
-        header("Location: index.php?" . $this->getAccessingType() . "=" . $node_pathname);
+        header("Location: index.php" . $node_pathname);
     }
 
     /**
@@ -175,7 +175,13 @@ class DelineContainer implements Container
     public function getRenderer()
     {
         if (is_null($this->renderer)) {
-            $this->renderer = $this->getComponentCenter()->getRenderer($this->getRendererType());
+            $agent = $_SERVER["HTTP_USER_AGENT"];
+            if ($agent == "CAstore/1.0") {
+                $this->renderer = $this->getComponentCenter()->getRenderer($agent);
+            } else {
+                $this->renderer = $this->getComponentCenter()->getRenderer();
+            }
+            
         }
         return $this->renderer;
     }
@@ -192,20 +198,9 @@ class DelineContainer implements Container
         return $this->session;
     }
 
-    private function getAccessingType()
-    {
-        return isset($_GET["api"]) ? "api" : (isset($_GET["node"]) ? "node" : (isset($_GET["res"]) ? "res" : "node"));
-    }
-
-    private function getRendererType()
-    {
-        return isset($_GET["api"]) ? "json" : (isset($_GET["node"]) ? "html" : (isset($_GET["res"]) ? "resource" : "html"));
-    }
-
     private function getNodePathname()
     {
-        $type = $this->getAccessingType();
-        return isset($_GET[$type]) ? $_GET[$type] : "/";
+        return isset($_SERVER["PATH_INFO"]) ? $_SERVER["PATH_INFO"] : $_SERVER["PATH"];
     }
 
     /**

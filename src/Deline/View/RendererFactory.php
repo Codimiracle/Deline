@@ -4,5 +4,5 @@ namespace Deline\View;
 interface RendererFactory
 {
 
-    public function getRenderer($type = "html");
+    public function getRenderer($type = "Browser");
 }
