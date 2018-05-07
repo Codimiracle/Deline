@@ -179,7 +179,7 @@ class DelineContainer implements Container
             if ($agent == "CAstore/1.0") {
                 $this->renderer = $this->getComponentCenter()->getRenderer($agent);
             } else {
-                $this->renderer = $this->getComponentCenter()->getRenderer();
+                $this->renderer = $this->getComponentCenter()->getRenderer("Browser");
             }
             
         }
