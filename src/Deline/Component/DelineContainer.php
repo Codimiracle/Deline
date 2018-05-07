@@ -255,10 +255,6 @@ class DelineContainer implements Container
      */
     public function invoke()
     {
-        if ($this->getRendererType() == "resource") {
-            $this->getRenderer()->setParameter("resource", $this->getNodePath());
-            return;
-        }
         global $logger;
         $node_path = null;
         try {
