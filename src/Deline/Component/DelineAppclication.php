@@ -73,9 +73,10 @@ class DelineAppclication
         try {
             $this->container->init();
             $this->container->invoke();
-            $this->container->destroy();
         } catch (\Exception $e) {
             echo $e->getMessage();
+        } finally {
+            $this->container->destroy();
         }
     }
 }

@@ -110,25 +110,17 @@ class DelineContainer implements Container
             "procedure" => "handle",
             "controller availiable" => boolval($controller)
         ));
-        if ($controller) {
-            try {
-                $controller->onControllerStart();
-                $controller->onControllerHandle();
-                $controller->onControllerEnd();
-                return;
-            } catch (PermissionException $exception) {
-                $this->dispatchPermissionDenied($exception->getMessage());
-            } catch (PageNotFoundException $exception) {
-                $this->dispatchPageNotFound();
-            } catch (\Exception $exception) {
-                $this->dispatchPageError($exception->getMessage());
-            }
-        } else {
-            $logger->addWarning("Controller", array(
-                "message" => "Page Not Found",
-                "node" => $this->getNodePathname()
-            ));
+        try {
+            $controller->onControllerStart();
+            $controller->onControllerHandle();
+        } catch (PermissionException $exception) {
+            $this->dispatchPermissionDenied($exception->getMessage());
+        } catch (PageNotFoundException $exception) {
             $this->dispatchPageNotFound();
+        } catch (\Exception $exception) {
+            $this->dispatchPageError($exception->getMessage());
+        } finally {
+            $controller->onControllerEnd();
         }
     }
 
