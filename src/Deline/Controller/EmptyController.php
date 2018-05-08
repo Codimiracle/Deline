@@ -19,5 +19,11 @@ class EmptyController implements Controller
 
     public function onControllerStart()
     {}
+    public function getContainer()
+    {}
+
+    public function setContainer($container)
+    {}
+
 }
 
