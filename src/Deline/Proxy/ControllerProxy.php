@@ -41,19 +41,19 @@ class ControllerProxy implements Controller
         try {
             $this->controller->onControllerHandle();
         } catch (PermissionException $exception) {
-            $logger->warning("Controller", array(
+            $this->logger->warning("Controller", array(
                 "message" => $exception->getMessage(),
                 "trace" => $exception->getTrace(),
             ));
             throw $exception;
         } catch (PageNotFoundException $exception) {
-            $logger->warning("Controller", array(
+            $this->logger->warning("Controller", array(
                 "message" => $exception->getMessage(),
                 "trace" => $exception->getTrace(),
             ));
             throw $exception;
         } catch (\Exception $exception) {
-            $logger->error("Controller", array(
+            $this->logger->error("Controller", array(
                 "message" => $exception->getMessage(),
                 "trace" => $exception->getTrace(),
             ));
