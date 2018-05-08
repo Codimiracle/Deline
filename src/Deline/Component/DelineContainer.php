@@ -144,8 +144,9 @@ class DelineContainer implements Container
     {
         if (is_null($this->renderer)) {
             $agent = $_SERVER["HTTP_USER_AGENT"];
-            if ($agent == "CAstore/1.0") {
-                $this->renderer = $this->getComponentCenter()->getRenderer($agent);
+            $client_agent = isset($GLOBALS["renderer"]["client_user_agent"]) ? $GLOBALS["renderer"]["client_user_agent"] : "";
+            if ($agent == $client_agent) {
+                $this->renderer = $this->getComponentCenter()->getRenderer("Client");
             } else {
                 $this->renderer = $this->getComponentCenter()->getRenderer("Browser");
             }
