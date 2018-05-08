@@ -51,17 +51,17 @@ class ContainerProxy implements Container
 
     public function redirect($node_pathname)
     {
-        $this->logger->debug("redirecting to: " . $node_pathname, $this->container);
+        $this->logger->debug("redirecting to: " . $node_pathname);
         $this->container->redirect($node_pathname);
     }
 
     public function setComponentCenter($componentCenter)
     {
         if (! $this->componentCenterInited) {
-            $this->logger->debug("component center is inited.",$this->container);
+            $this->logger->debug("component center is inited.");
             $this->componentCenterInited = true;
         } else {
-            $this->logger->warning("component center reset.", $this->container);
+            $this->logger->warning("component center reset.");
         }
         $this->container->setComponentCenter($componentCenter);
     }
@@ -73,16 +73,16 @@ class ContainerProxy implements Container
 
     public function init()
     {
-        $this->logger->debug("init container", $this->container);
+        $this->logger->debug("init container");
         if (!$this->componentCenterInited) {
-            $this->logger->error("you did not initial component center yet!!", $this->container);
+            $this->logger->error("you did not initial component center yet!!");
         }
         $this->container->init();
     }
 
     public function getDataSource()
     {
-        $this->logger->debug("getting data source", $this->container);
+        $this->logger->debug("getting data source");
         return $this->container->getDataSource();
     }
 
@@ -93,32 +93,32 @@ class ContainerProxy implements Container
 
     public function dispatch($node_pathname)
     {
-        $this->logger->debug("dispatching to: " . $node_pathname, $this->container);
+        $this->logger->debug("dispatching to: " . $node_pathname);
         $this->container->dispatch($node_pathname);
     }
 
     public function getNodePath()
     {
         $nodePath = $this->container->getNodePath();
-        $this->logger->info("node path:" . $nodePath, $this->container);
+        $this->logger->info("node path:" . $nodePath);
         return $nodePath;
     }
 
     public function destroy()
     {
-        $this->logger->debug("dispatching to: " . $node_pathname, $this->container);
+        $this->logger->debug("dispatching to: " . $node_pathname);
         return $this->container->destroy();
     }
 
     public function invoke()
     {
-        $this->logger->debug("container invoke start", $this->container);
+        $this->logger->debug("container invoke start");
         try {
             $this->container->invoke();
         } catch (\Exception $e) {
-            $this->logger->error($e->getMessage(), $this->container);
+            $this->logger->error($e->getMessage());
         }
-        $this->logger->debug("container invoke end", $this->container);
+        $this->logger->debug("container invoke end");
     }
 
     public function getAuthorization()
