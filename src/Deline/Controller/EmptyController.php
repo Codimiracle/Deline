@@ -15,7 +15,9 @@ class EmptyController implements Controller
     {}
 
     public function onControllerHandle()
-    {}
+    {
+        $this->onControllerDefaultHandle();
+    }
 
     public function onControllerStart()
     {}
