@@ -15,7 +15,9 @@ use Deline\Service\DelineCommonUploadService;
 
 abstract class AbstractComponentCenter implements ComponentCenter
 {
+
     private $logger;
+
     private $renderers = array(
         "Browser" => HTMLRenderer::class,
         "Client" => JSONRenderer::class
@@ -35,13 +37,16 @@ abstract class AbstractComponentCenter implements ComponentCenter
     /** @var Container **/
     private $container;
 
-    public function getLogger() {
+    public function getLogger()
+    {
         return $this->logger;
     }
-    
-    public function setLogger($logger) {
+
+    public function setLogger($logger)
+    {
         $this->logger = $logger;
     }
+
     /**
      * 获取当前用于创建组件的容器
      *
@@ -180,10 +185,10 @@ abstract class AbstractComponentCenter implements ComponentCenter
         /** @var Controller $controller */
         $proxy = new ControllerProxy();
         $controller = new $class();
-        $controller->setContainer($this->container);
         $proxy->setController($controller);
+        $proxy->setContainer($this->container);
         $proxy->setLogger($this->logger);
-        return $controller;
+        return $proxy;
     }
 
     public function getService($name)

@@ -15,6 +15,14 @@ class ControllerProxy implements Controller
     {
         $this->controller = $controller;
     }
+    
+    public function getContainer() {
+        return $this->controller->getContainer();
+    }
+    
+    public function setContainer($container) {
+        $this->controller->setContainer($container);
+    }
 
     public function setLogger($logger)
     {
