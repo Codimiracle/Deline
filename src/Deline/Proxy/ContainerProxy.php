@@ -14,6 +14,40 @@ class ContainerProxy implements Container
 
     /** @var Logger */
     private $logger;
+    
+    
+
+    /**
+     * @return \Deline\Component\Container
+     */
+    public function getContainer()
+    {
+        return $this->container;
+    }
+
+    /**
+     * @return \Monolog\Logger
+     */
+    public function getLogger()
+    {
+        return $this->logger;
+    }
+
+    /**
+     * @param \Deline\Component\Container $container
+     */
+    public function setContainer($container)
+    {
+        $this->container = $container;
+    }
+
+    /**
+     * @param \Monolog\Logger $logger
+     */
+    public function setLogger($logger)
+    {
+        $this->logger = $logger;
+    }
 
     public function redirect($node_pathname)
     {
