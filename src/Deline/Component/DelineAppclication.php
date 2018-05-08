@@ -2,6 +2,7 @@
 namespace Deline\Component;
 
 use Monolog\Logger;
+use Deline\Proxy\ContainerProxy;
 
 class DelineAppclication
 {
@@ -28,7 +29,10 @@ class DelineAppclication
     public function setComponentCenter($componentCenter)
     {
         $this->componentCenter = $componentCenter;
-        $this->container = new DelineContainer();
+        $container = new DelineContainer();
+        $this->container = new ContainerProxy();
+        $this->setLogger($this->logger);
+        $this->setContainer($container);
         $this->container->setComponentCenter($componentCenter);
     }
 
@@ -66,11 +70,8 @@ class DelineAppclication
     public function run()
     {
         try {
-            $this->logger->addDebug("DelineApplication", array("status" => "initializing"));
             $this->container->init();
-            $this->logger->addDebug("DelineApplication", array("status" => "invoking"));
             $this->container->invoke();
-            $this->logger->addDebug("DelineApplication", array("status" => " destroy"));
             $this->container->destroy();
         } catch (\Exception $e) {
             echo $e->getMessage();

@@ -16,7 +16,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
 
     private $renderers = array(
         "Browser" => HTMLRenderer::class,
-        "CAstore/1.0" => JSONRenderer::class
+        "Client" => JSONRenderer::class
     );
 
     private $services = array(

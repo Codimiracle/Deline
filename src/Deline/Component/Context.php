@@ -38,6 +38,11 @@ interface Context
     public function getAuthorization();
 
     /**
+     * 
+     * @param ComponentCenter $componentCenter
+     */
+    public function setComponentCenter($componentCenter);
+    /**
      *
      * @return ComponentCenter
      */
