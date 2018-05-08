@@ -57,9 +57,9 @@ class ContainerProxy implements Container
 
     public function setComponentCenter($componentCenter)
     {
-        if (! $componentCenterInited) {
+        if (! $this->componentCenterInited) {
             $this->logger->debug("component center is inited.",$this->container);
-            $componentCenterInited = true;
+            $this->componentCenterInited = true;
         } else {
             $this->logger->warning("component center reset.", $this->container);
         }
