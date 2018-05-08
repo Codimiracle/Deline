@@ -9,6 +9,8 @@ use Deline\View\RendererFactory;
 interface ComponentCenter extends ControllerFactory, DataAccessObjectFactory, ServiceFactory, RendererFactory
 {
 
+    public function setLogger($logger);
+    public function getLogger();
     public function setContainer($container);
 
     public function getContainer();

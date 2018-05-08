@@ -31,8 +31,9 @@ class DelineAppclication
         $this->componentCenter = $componentCenter;
         $container = new DelineContainer();
         $this->container = new ContainerProxy();
-        $this->setLogger($this->logger);
-        $this->setContainer($container);
+        $this->componentCenter->setLogger($this->logger);
+        $this->container->setLogger($this->logger);
+        $this->container->setContainer($container);
         $this->container->setComponentCenter($componentCenter);
     }
 
