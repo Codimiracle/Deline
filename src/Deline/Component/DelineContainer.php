@@ -112,39 +112,15 @@ class DelineContainer implements Container
         ));
         if ($controller) {
             try {
-                $logger->addInfo("DelineContainer", array(
-                    "procedure" => "Controller",
-                    "name" => $controller_name,
-                    "class" => get_class($controller),
-                    "status" => "start"
-                ));
                 $controller->onControllerStart();
                 $controller->onControllerHandle();
                 $controller->onControllerEnd();
-                $logger->addInfo("DelineContainer", array(
-                    "procedure" => "action",
-                    "name" => $controller_name,
-                    "class" => get_class($controller),
-                    "status" => "end"
-                ));
                 return;
             } catch (PermissionException $exception) {
-                $logger->addWarning("Controller", array(
-                    "message" => $exception->getMessage(),
-                    "trace" => $exception->getTrace()
-                ));
                 $this->dispatchPermissionDenied($exception->getMessage());
             } catch (PageNotFoundException $exception) {
-                $logger->addWarning("Controller", array(
-                    "message" => $exception->getMessage(),
-                    "trace" => $exception->getTrace()
-                ));
                 $this->dispatchPageNotFound();
             } catch (\Exception $exception) {
-                $logger->addWarning("Controller", array(
-                    "message" => $exception->getMessage(),
-                    "trace" => $exception->getTrace()
-                ));
                 $this->dispatchPageError($exception->getMessage());
             }
         } else {

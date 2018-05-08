@@ -4,7 +4,9 @@ namespace Deline\Component;
 use Deline\View\HTMLRenderer;
 use Deline\View\JSONRenderer;
 use Deline\View\ResourceRenderer;
+use Deline\Controller\EmptyController;
 use Deline\Controller\SystemController;
+use Deline\Proxy\ControllerProxy;
 use Deline\Service\Service;
 use Deline\Model\DAO\DataAccessObject;
 use Deline\View\Renderer;
@@ -55,7 +57,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
 
     /**
      * 获取所有的渲染器
-     * 
+     *
      * @return multitype:string
      */
     public function getRenderers()
@@ -65,7 +67,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
 
     /**
      * 获取所有的服务
-     * 
+     *
      * @return multitype:string
      */
     public function getServices()
@@ -75,7 +77,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
 
     /**
      * 获取所有的控制器
-     * 
+     *
      * @return multitype:string
      */
     public function getControllers()
@@ -85,7 +87,7 @@ abstract class AbstractComponentCenter implements ComponentCenter
 
     /**
      * 获取所有数据访问对象
-     * 
+     *
      * @return multitype:string
      */
     public function getDAOs()
@@ -165,14 +167,16 @@ abstract class AbstractComponentCenter implements ComponentCenter
     public function getController($name)
     {
         $class = $this->getComponentClass($this->controllers, $name);
-        if ($class) {
-            /** @var Controller $controller */
-            $controller = new $class();
-            $controller->setContainer($this->container);
-            return $controller;
-        } else {
-            return null;
+        if (! $class) {
+            $class = EmptyController::class; // 如果没有相应的控制器则使用空控制器
         }
+        /** @var Controller $controller */
+        $proxy = new ControllerProxy();
+        $controller = new $class();
+        $controller->setContainer($this->container);
+        $proxy->setController($controller);
+        $proxy->setLogger();
+        return $controller;
     }
 
     public function getService($name)
@@ -180,9 +184,9 @@ abstract class AbstractComponentCenter implements ComponentCenter
         $class = $this->getComponentClass($this->services, $name);
         if ($class) {
             /** @var Controller $controller */
-            $controller = new $class();
-            $controller->setContainer($this->container);
-            return $controller;
+            $service = new $class();
+            $service->setContainer($this->container);
+            return $service;
         } else {
             return null;
         }
