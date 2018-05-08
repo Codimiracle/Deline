@@ -106,7 +106,7 @@ class ContainerProxy implements Container
 
     public function destroy()
     {
-        $this->logger->debug("dispatching to: " . $node_pathname);
+        $this->logger->debug("container destory.");
         return $this->container->destroy();
     }
 
