@@ -65,6 +65,11 @@ class DelineFileService implements FileService
     {
         return $this->fileInfoDAO->queryByTargetId($targetId);
     }
+    
+    public function queryByTargetIdWithField($targetId,$field)
+    {
+        return $this->fileInfoDAO->queryByTargetIdWithField($targetId, $field);
+    }
     public function getLastInsertedId()
     {
         return $this->fileInfoDAO->getLastInsertedId();

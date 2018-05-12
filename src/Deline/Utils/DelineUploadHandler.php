@@ -1,9 +1,9 @@
 <?php
 namespace Deline\Utils;
 
-use CAstore\Model\Entity\FileInfo;
+use Deline\Model\Entity\FileInfo;
 use Deline\Service\DelineUploadService;
-use CAstore\Service\FileService;
+use Deline\Service\FileService;
 
 class DelineUploadHandler
 {
@@ -12,7 +12,7 @@ class DelineUploadHandler
     private $group;
     private $contentId;
     
-    /** @var DelineUploadHandler */
+    /** @var DelineUploadService */
     private $uploadService;
     private $fileService;
     
@@ -72,16 +72,26 @@ class DelineUploadHandler
         $fileInfo->setField($field);
         $fileInfo->setTargetId($contentId);
         $this->fileService->append($fileInfo);
-        
     }
     public function handle() {
         if ($this->group) {
             $info = $this->uploadService->getUploadInfo($this->field);
-        } else {
             //上传成功！
             if ($info != null && $info["error"] == 0) {
-                return $this->fileService->getInsertedId();
+                $this->move($this->contentId, $this->field, $this->options["upload_dir"]);
+                return true;
             }
+        } else {
+            $success = true;
+            $infos = $this->uploadService->getUploadInfoGroup($this->field);
+            foreach ($infos as $info) {
+                if ($info != null && $info["error"] == 0) {
+                    $this->move($this->contentId, $this->field, $this->options["upload_dir"]);
+                } else {
+                    $success = false;
+                }
+            }
+            return $success;
         }
         return false;
     }
