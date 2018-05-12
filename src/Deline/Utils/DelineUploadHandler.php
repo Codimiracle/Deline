@@ -16,7 +16,7 @@ class DelineUploadHandler
     private $uploadService;
     private $fileService;
     
-    public function __construct($field, $contentId, $options = null, $group = false,) {
+    public function __construct($field, $contentId, $options = null, $group = false) {
         $this->field = $field;
         $this->contentId = $contentId;
         $this->options = array(
