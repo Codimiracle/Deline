@@ -20,7 +20,7 @@ class DelineUploadHandler
         $this->field = $field;
         $this->contentId = $contentId;
         $this->options = array(
-            "upload_dir" => getcwd()."/static/files"
+            "upload_dir" => "static/files"
         );
         if (is_array($options)) {
             $this->options = $options +  $this->options;
