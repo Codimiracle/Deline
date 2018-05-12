@@ -7,29 +7,34 @@ use Deline\Service\FileService;
 
 class DelineUploadHandler
 {
+
     private $options;
+
     private $field;
+
     private $group;
+
     private $contentId;
-    
+
     /** @var DelineUploadService */
     private $uploadService;
+
     private $fileService;
-    
-    public function __construct($field, $contentId, $options = null, $group = false) {
+
+    public function __construct($field, $contentId, $options = null, $group = false)
+    {
         $this->field = $field;
         $this->contentId = $contentId;
         $this->options = array(
             "upload_dir" => "static/files"
         );
         if (is_array($options)) {
-            $this->options = $options +  $this->options;
+            $this->options = $this->options + $options; 
         }
     }
-    
-    
-    
+
     /**
+     *
      * @return DelineUploadService
      */
     public function getUploadService()
@@ -38,16 +43,16 @@ class DelineUploadHandler
     }
 
     /**
+     *
      * @param DelineUploadService $uploadService
      */
     public function setUploadService($uploadService)
     {
         $this->uploadService = $uploadService;
     }
-    
-    
-    
+
     /**
+     *
      * @return FileService
      */
     public function getFileService()
@@ -56,6 +61,7 @@ class DelineUploadHandler
     }
 
     /**
+     *
      * @param FileService $fileService
      */
     public function setFileService($fileService)
@@ -63,8 +69,11 @@ class DelineUploadHandler
         $this->fileService = $fileService;
     }
 
-    private function move($info, $contentId, $field, $dir) {
-        mkdir($dir,0747);
+    private function move($info, $contentId, $field, $dir)
+    {
+        if (! file_exists($dir)) {
+            mkdir($dir, 0747);
+        }
         $name = $this->uploadService->moveUploadedFileByInfo($info, $dir);
         $fileInfo = new FileInfo();
         $fileInfo->setMimeType($info["type"]);
@@ -74,10 +83,12 @@ class DelineUploadHandler
         $fileInfo->setTargetId($contentId);
         $this->fileService->append($fileInfo);
     }
-    public function handle() {
+
+    public function handle()
+    {
         if ($this->group) {
             $info = $this->uploadService->getUploadInfo($this->field);
-            //上传成功！
+            // 上传成功！
             if ($info != null && $info["error"] == 0) {
                 $this->move($info, $this->contentId, $this->field, $this->options["upload_dir"]);
                 return true;
