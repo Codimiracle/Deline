@@ -1,9 +1,8 @@
 <?php
-namespace CAstore\Service;
+namespace Deline\Service;
 
-use CAstore\Model\DAO\FileInfoDAO;
 use Deline\Component\Container;
-use Deline\Service\UploadService;
+use Deline\Model\DAO\FileInfoDAO;
 
 
 class DelineFileService implements FileService
