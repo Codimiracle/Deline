@@ -63,7 +63,7 @@ class DelineUploadHandler
         $this->fileService = $fileService;
     }
 
-    private function move($contentId, $field, $dir) {
+    private function move($info, $contentId, $field, $dir) {
         $name = $this->uploadService->moveUploadedFileByInfo($info, $dir);
         $fileInfo = new FileInfo();
         $fileInfo->setMimeType($info["type"]);
@@ -78,7 +78,7 @@ class DelineUploadHandler
             $info = $this->uploadService->getUploadInfo($this->field);
             //上传成功！
             if ($info != null && $info["error"] == 0) {
-                $this->move($this->contentId, $this->field, $this->options["upload_dir"]);
+                $this->move($info, $this->contentId, $this->field, $this->options["upload_dir"]);
                 return true;
             }
         } else {
@@ -86,7 +86,7 @@ class DelineUploadHandler
             $infos = $this->uploadService->getUploadInfoGroup($this->field);
             foreach ($infos as $info) {
                 if ($info != null && $info["error"] == 0) {
-                    $this->move($this->contentId, $this->field, $this->options["upload_dir"]);
+                    $this->move($info, $this->contentId, $this->field, $this->options["upload_dir"]);
                 } else {
                     $success = false;
                 }
