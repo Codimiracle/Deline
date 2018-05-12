@@ -26,10 +26,12 @@ class DelineUploadHandler
         $this->field = $field;
         $this->contentId = $contentId;
         $this->options = array(
-            "upload_dir" => "static/files"
+            "upload_dir" => "static/files",
+            "upload_field_prefix" => "",
+            "upload_field_suffix" => ""
         );
         if (is_array($options)) {
-            $this->options = $this->options + $options; 
+            $this->options = $this->options + $options;
         }
     }
 
@@ -79,7 +81,7 @@ class DelineUploadHandler
         $fileInfo->setMimeType($info["type"]);
         $fileInfo->setPath($dir . "/" . $name);
         $fileInfo->setSize($info["size"]);
-        $fileInfo->setField($field);
+        $fileInfo->setField($this->options["upload_field_prefix"] . $field . $this->options["upload_field_suffix"]);
         $fileInfo->setTargetId($contentId);
         $this->fileService->append($fileInfo);
     }
