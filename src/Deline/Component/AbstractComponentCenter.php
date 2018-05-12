@@ -1,15 +1,15 @@
 <?php
 namespace Deline\Component;
 
-use CAstore\Model\DAO\DelineFileInfoDAO;
 use Deline\Controller\EmptyController;
 use Deline\Controller\SystemController;
+use Deline\Model\DAO\DelineFileInfoDAO;
 use Deline\Proxy\ControllerProxy;
 use Deline\Service\DelineCommonUploadService;
+use Deline\Service\DelineFileService;
 use Deline\Service\DelineUploadService;
 use Deline\View\HTMLRenderer;
 use Deline\View\JSONRenderer;
-use CAstore\Service\DelineFileService;
 
 abstract class AbstractComponentCenter implements ComponentCenter
 {
