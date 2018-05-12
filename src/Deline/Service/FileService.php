@@ -1,5 +1,5 @@
 <?php
-namespace CAstore\Service;
+namespace Deline\Service;
 
 use Deline\Service\EntityService;
 

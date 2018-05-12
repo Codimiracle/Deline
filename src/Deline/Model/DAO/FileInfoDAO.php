@@ -1,7 +1,6 @@
 <?php
-namespace CAstore\Model\DAO;
+namespace Deline\Model\DAO;
 
-use Deline\Model\DAO\DataAccessObject;
 
 interface FileInfoDAO extends DataAccessObject
 {
