@@ -19,7 +19,7 @@ class DelineFileInfoDAO extends AbstractDAO implements FileInfoDAO
 
     const QUERY_BY_TARGET_ID = "SELECT * FROM file_info WHERE targetId = :targetId";
     
-    const QUERY_BY_TARGET_ID = "SELECT * FROM file_info WHERE targetId = :targetId AND field = :field";
+    const QUERY_BY_TARGET_ID_WITH_FIELD = "SELECT * FROM file_info WHERE targetId = :targetId AND field = :field";
     
     public function getLastInsertedId()
     {
@@ -136,7 +136,7 @@ class DelineFileInfoDAO extends AbstractDAO implements FileInfoDAO
     
     public function queryByTargetIdWithField($targetId, $field)
     {
-        return $this->getEntities(self::QUERY_BY_TARGET_ID, array(
+        return $this->getEntities(self::QUERY_BY_TARGET_ID_WITH_FIELD, array(
             ":targetId" => $targetId,
             ":field" => $field
         ), FileInfo::class);
