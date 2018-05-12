@@ -1,7 +1,7 @@
 <?php
 namespace Deline\Model\DAO;
 
-use CAstore\Model\Entity\FileInfo;
+use Deline\Model\Entity\FileInfo;
 use PDOException;
 
 class DelineFileInfoDAO extends AbstractDAO implements FileInfoDAO
