@@ -31,7 +31,7 @@ class DelineUploadHandler
             "upload_field_suffix" => ""
         );
         if (is_array($options)) {
-            $this->options = $this->options + $options;
+            $this->options = $options + $this->options;
         }
     }
 
@@ -95,6 +95,7 @@ class DelineUploadHandler
                 $this->move($info, $this->contentId, $this->field, $this->options["upload_dir"]);
                 return true;
             }
+            
         } else {
             $success = true;
             $infos = $this->uploadService->getUploadInfoGroup($this->field);
