@@ -1,5 +1,5 @@
 <?php
-namespace CAstore\Model\Entity;
+namespace Deline\Model\Entity;
 
 use Deline\Model\Entity\Entity;
 
