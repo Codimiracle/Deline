@@ -1,17 +1,15 @@
 <?php
 namespace Deline\Component;
 
-use Deline\View\HTMLRenderer;
-use Deline\View\JSONRenderer;
-use Deline\View\ResourceRenderer;
+use CAstore\Model\DAO\DelineFileInfoDAO;
 use Deline\Controller\EmptyController;
 use Deline\Controller\SystemController;
 use Deline\Proxy\ControllerProxy;
-use Deline\Service\Service;
-use Deline\Model\DAO\DataAccessObject;
-use Deline\View\Renderer;
-use Deline\Service\DelineUploadService;
 use Deline\Service\DelineCommonUploadService;
+use Deline\Service\DelineUploadService;
+use Deline\View\HTMLRenderer;
+use Deline\View\JSONRenderer;
+use CAstore\Service\DelineFileService;
 
 abstract class AbstractComponentCenter implements ComponentCenter
 {
@@ -25,14 +23,17 @@ abstract class AbstractComponentCenter implements ComponentCenter
 
     private $services = array(
         "UploadService" => DelineUploadService::class,
-        "CommonUploadService" => DelineCommonUploadService::class
+        "CommonUploadService" => DelineCommonUploadService::class,
+        "FileService" => DelineFileService::class
     );
 
     private $controllers = array(
         "System" => SystemController::class
     );
 
-    private $daos = array();
+    private $daos = array(
+        "FileInfoDAO" => DelineFileInfoDAO::class
+    );
 
     /** @var Container **/
     private $container;

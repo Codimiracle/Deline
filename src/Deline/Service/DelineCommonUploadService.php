@@ -1,20 +1,20 @@
 <?php
 namespace Deline\Service;
 
-use Deline\Utils\DelineUploadHandler;
+use Deline\Utils\DelineCommonUploadHandler;
 use CommonUploadService;
 
 class DelineCommonUploadService implements CommonUploadService
 {
 
-    /** @var DelineUploadHandler $uploader */
+    /** @var DelineCommonUploadHandler $uploader */
     private $uploader;
     
     private $container;
 
     public function doUpload($dirname = null)
     {
-        $uploader = new DelineUploadHandler($dirname);
+        $uploader = new DelineCommonUploadHandler($dirname);
     }
     public function getContainer()
     {
