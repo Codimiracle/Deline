@@ -64,6 +64,7 @@ class DelineUploadHandler
     }
 
     private function move($info, $contentId, $field, $dir) {
+        mkdir($dir,0747);
         $name = $this->uploadService->moveUploadedFileByInfo($info, $dir);
         $fileInfo = new FileInfo();
         $fileInfo->setMimeType($info["type"]);
