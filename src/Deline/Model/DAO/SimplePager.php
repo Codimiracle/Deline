@@ -21,7 +21,7 @@ class SimplePager implements Pager
 
     public function getOffset()
     {
-        return $this->offset * $this->length;
+        return ($this->offset - 1) * $this->length;
     }
 
     public function getLength()
