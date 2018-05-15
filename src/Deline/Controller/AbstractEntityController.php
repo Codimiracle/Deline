@@ -8,7 +8,7 @@ abstract class AbstractEntityController extends AbstractController
     {
         $this->attachAction("/^\\/Append($|\\/$)/", "onEntityAppend");
         $this->attachAction("/^\\/$/", "onEntityList");
-        $this->attachAction("/^\\/Pager/[0-9]+($|\\/$)/", "onEntityList");
+        $this->attachAction("/^\\/Pager\\/[0-9]+($|\\/$)/", "onEntityList");
         $this->attachAction("/^\\/[0-9]+($|\\/$)/", "onEntityDetails");
         $this->attachAction("/^\\/[0-9]+\\/Edit($|\\/$)/", "onEntityEdit");
         $this->attachAction("/^\\/[0-9]+\\/Delete($|\\/$)/", "onEntityDelete");
