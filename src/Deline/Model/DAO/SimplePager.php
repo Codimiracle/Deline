@@ -16,7 +16,7 @@ class SimplePager implements Pager
 
     public function getTranformSQL($sentence)
     {
-        return $sentence . " LIMIT ?, ?";
+        return $sentence . " LIMIT :offset, :length";
     }
 
     public function getOffset()
