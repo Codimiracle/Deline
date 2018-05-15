@@ -40,7 +40,7 @@ abstract class AbstractEntityController extends AbstractController
         if (is_numeric($node)) {
             return intval($node);
         } else {
-            return - 1;
+            return 0;
         }
     }
 
