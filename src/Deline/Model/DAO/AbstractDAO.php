@@ -101,9 +101,9 @@ abstract class AbstractDAO implements DataAccessObject
             ->prepare($sentence);
         if (! is_null($this->getPager())) {
             $prepared->bindValue(":offset", $this->getPager()
-                ->getOffset());
+                ->getOffset(), \PDO::PARAM_INT);
             $prepared->bindValue(":length", $this->getPager()
-                ->getLength());
+                ->getLength(), \PDO::PARAM_INT);
         }
         return $prepared;
     }
@@ -129,6 +129,7 @@ abstract class AbstractDAO implements DataAccessObject
 
     /**
      * 将结果集单条记录映射到 Entity 。
+     *
      * @param string $query
      * @param mititype:string $args
      * @param string $class
