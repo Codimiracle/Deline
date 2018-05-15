@@ -38,7 +38,11 @@ abstract class AbstractEntityController extends AbstractController
             ->getSubnodePath()
             ->getMainNodeName();
         if (is_numeric($node)) {
-            return intval($node);
+            $pn = intval($node);
+            if ($pn < 1) {
+                return 1;
+            }
+            return $pn;
         } else {
             return 1;
         }
