@@ -26,7 +26,7 @@ class DecrementPager implements Pager
 
     public function getTranformSQL($sentence)
     {
-        return $sentence . "ORDER BY " . $this->key . " LIMIT :offset, :length";
+        return $sentence . " ORDER BY " . $this->key . " LIMIT :offset, :length";
     }
 
     public function getOffset()
