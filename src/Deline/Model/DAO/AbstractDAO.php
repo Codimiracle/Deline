@@ -100,9 +100,9 @@ abstract class AbstractDAO implements DataAccessObject
             ->getConnection()
             ->prepare($sentence);
         if (! is_null($this->getPager())) {
-            $prepared->bindParam(":offset", $this->getPager()
+            $prepared->bindValue(":offset", $this->getPager()
                 ->getOffset());
-            $prepared->bindParam(":length", $this->getPager()
+            $prepared->bindValue(":length", $this->getPager()
                 ->getLength());
         }
         return $prepared;
