@@ -40,7 +40,7 @@ class JSONRenderer implements Renderer
 
     public function getParameter($key)
     {
-        return $this->json[$key];
+        return isset($this->json[$key]) ? $this->json[$key] : null;
     }
 
     public function render()
