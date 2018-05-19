@@ -5,7 +5,7 @@ class RendererBuilder
 {
 
     const MESSAGE_ICON_INFO = "info";
-    
+
     const MESSAGE_ICON_WARNING = "warning";
 
     const MESSAGE_ICON_DANGER = "danger";
@@ -34,20 +34,13 @@ class RendererBuilder
 
     public function setData($key, $value)
     {
-        $this->renderer->setParameter("code", 200);
-        $data = $this->renderer->getParameter("data");
-        $data = is_null($data) ? array() : $data;
-        $this->renderer->setParameter("data", $data + array($key => $value));
+        $this->renderer->setParameter($key, $value);
     }
 
     public function setMessage($icon, $message)
     {
-        $this->renderer->setParameter("code", 500);
-        $this->renderer->setParameter("data", array(
-            "type" => "msg",
-            "icon" => $icon,
-            "message" => $message
-        ));
-        return $this;
+        $this->renderer->setParameter("type", "msg");
+        $this->renderer->setParameter("icon", $icon);
+        $this->renderer->setParameter("message", $message);
     }
 }
