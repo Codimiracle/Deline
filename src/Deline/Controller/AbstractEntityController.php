@@ -67,7 +67,10 @@ abstract class AbstractEntityController extends AbstractController
         return isset($_GET["kw"]) ? $_GET["kw"] : "";
     }
 
-    public abstract function onEntityList();
+    public function onEntityList()
+    {
+        $this->onEntityPagerList();
+    }
 
     public abstract function onEntityPagerList();
 
