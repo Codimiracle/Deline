@@ -11,7 +11,7 @@ abstract class AbstractEntityController extends AbstractController
         $this->attachAction("/^\\/Pager\\/Count($|\\/$)/", "onEntityPagerCount");
         $this->attachAction("/^\\/Pager\\/[0-9]+($|\\/$)/", "onEntityPagerList");
         $this->attachAction("/^\\/Search($|\\/$)/", "onEntitySearch");
-        $this->attachAction("/^\\/Search\\/Count($|\\/$)/", "onEntitySearchPagerCount");
+        $this->attachAction("/^\\/Search\\/Pager\\/Count($|\\/$)/", "onEntitySearchPagerCount");
         $this->attachAction("/^\\/Search\\/Pager\\/[0-9]+($|\\/$)/", "onEntitySearchPagerList");
         $this->attachAction("/^\\/[0-9]+($|\\/$)/", "onEntityDetails");
         $this->attachAction("/^\\/[0-9]+\\/Edit($|\\/$)/", "onEntityEdit");
